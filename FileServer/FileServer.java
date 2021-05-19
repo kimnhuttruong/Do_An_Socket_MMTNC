@@ -131,9 +131,11 @@ class FileServerHandler extends Thread {
         done = str.getBytes();
         int n = 0;
         for (int i = 0; i < files.size(); i++) {
+            System.out.println("Sending: "+files.get(i));
             FileInputStream fis = new FileInputStream(files.get(i));
             while ((n = fis.read(buf)) != -1) {
                 dos.write(buf, 0, n);
+                System.out.println("Sent: "+ n+" B");
                 dos.flush();
             }
             //should i close the dataoutputstream here and make a new one each time?                 
@@ -191,7 +193,7 @@ class FileServerHandler extends Thread {
                 br.close();
             } while (true);
         } catch (IOException e) {
-            System.out.println("There're some error");
+            System.out.println("Done");
         }
     }
 }
